@@ -3,6 +3,7 @@ const Configure = {
         bind: `:`,
     },
     priority: [
+        'model',
         'forin',
         'each'
     ]

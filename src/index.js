@@ -52,11 +52,6 @@ App.use([Controls, Models, Views])
 new App('app',{
     methods: {
         hello(){
-            console.log('hello',this.title)
-            setTimeout(()=>{
-                console.log('hello 3')
-                this.title = 'AAA'
-            },3000)
             return 'title'
         }
     },
@@ -69,7 +64,6 @@ new App('app',{
         title: 'App',
         description: 'this is template',
     },
-    template:`<h1>Hey  , {{ title }}</h1><p><span :text="demo"></span> {{ description }}</p>`,
     onReady(app) {
         console.log('onReady',this)
         app.hello()

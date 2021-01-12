@@ -3,7 +3,7 @@ export const hasInterpolation = text => /\{?\{\{(.+?)\}\}\}?/g.test(text)
 export function domify(DOMString) {
     const html = document.implementation.createHTMLDocument()
     html.body.innerHTML = DOMString
-    return html.body
+    return html
 }
 
 export function walk(el, action, done) {
@@ -172,6 +172,33 @@ export const config = {
             }
             this.oldValue = value
             this.node.textContent = value
+        },
+    },
+    model: {
+        before(value) {
+            this.isUpdate = true
+            if (this.oldValue == value) {
+                this.isUpdate = false
+            }
+        },
+        display(value) {
+            if (!this.isUpdate) {
+                return
+            }
+
+            this.node.value = typeof value == 'undefined' ? '' : value;
+            this.node.addEventListener('input', (e) => {
+
+                var newValue = e.target.value;
+                if (value === newValue) {
+                    return;
+                }
+
+                this.oldValue = e.target.value
+                this.compile.data[this.expression] = e.target.value;
+                
+            });
+
         },
     },
     attribute : {

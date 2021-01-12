@@ -2,15 +2,15 @@ class App {
     static modules = []
     constructor(name,options) {
         this.options = options
-        this.init()
-        this.show(document.getElementById(name))
+        this.init(document.getElementById(name))
+        // this.show(document.getElementById(name))
     }
 
     static use(module) {
         Array.isArray(module) ? module.map(item => App.use(item)) : App.modules.push(module)
     }
 
-    init() {
+    init(el) {
         this.initModules()
 
         let computed = this.options.computed
@@ -27,10 +27,12 @@ class App {
         this.view.setData(this.model)
         // this.model.register(this.view)
         this.options.onReady(this)
+
+        this.view.compile(el)
     }
 
     show(dom){
-        const body = this.view.compile()
+        const body = this.view.compile(el)
         dom.innerHTML = body.innerHTML
         this.options.onShow(this)
     }

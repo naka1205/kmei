@@ -16,8 +16,18 @@ class View {
         this.template = template
     }
 
-    compile(){
-        return new Compile(this.template,this.data).view
+    compile(el){
+        return new Compile(el,this.data).view
+    }
+
+    nodeToFragment (el) {
+        var fragment = document.createDocumentFragment();
+        var child = el.firstChild;
+        while (child) {
+            fragment.appendChild(child);
+            child = el.firstChild
+        }
+        return fragment;
     }
 
 }

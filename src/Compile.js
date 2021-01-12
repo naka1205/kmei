@@ -1,6 +1,6 @@
 import Configure from './Configure';
 import Directive from './Directive';
-import {walk,domify,parseText} from './Utils';
+import {walk,domify,parseText,hasInterpolation} from './Utils';
 
 class Compile {
     constructor(template,data) {
@@ -34,12 +34,13 @@ class Compile {
         for (let i = 0; i < Configure.priority.length; i++) {
             const directive = Configure.priority[i]
             let attributeValue = node.getAttribute(`${Configure.identifier.bind}${directive}`)
-    
+            
             if (attributeValue) {
                 attributeValue = attributeValue.trim()
                 if (!attributeValue) return false
     
                 node.removeAttribute(`${Configure.identifier.bind}${directive}`)
+
                 this.bindDirective({
                     node,
                     name: directive,
@@ -90,7 +91,6 @@ class Compile {
         attributes.map(attribute => {
             const attributeName = attribute.name
             const attributeValue = attribute.value.trim()
-
             if (attributeName.indexOf(Configure.identifier.bind) === 0 && attributeValue !== '') {
                 const directiveName = attributeName.slice(Configure.identifier.bind.length)
 
