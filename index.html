@@ -8,8 +8,12 @@
 <body>
     <div id="app">
         <h1>Hey  , {{ title }}</h1>
-        <p>{{ description }}</p>
+        <p :text="content"></p>
         <input :model="title" ></span> 
+
+        <ul>
+            <li :forin="(item, key) in lists">{{ item.value }}</li>
+        </ul>
     </div> 
 </body>
 </html>

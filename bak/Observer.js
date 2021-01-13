@@ -1,5 +1,6 @@
 class Observer {
     constructor () {}
+    beforeUpdate() {}
     update () {}
 }
 

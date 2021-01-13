@@ -1,21 +1,21 @@
-import {generate,config} from './Utils';
-import Observer from './Observer';
+import {generate,firstToUpper} from './Utils';
+import Observer from './Observer'
+import Directives from './directives'
 
 class Directive extends Observer {
     constructor(options) {
         super()
-        Object.assign(this, options)
-        Object.assign(this, config[this.name])
+        Object.assign(this, options);
+        Object.assign(this, Directives[firstToUpper(this.name)]);
+        
         this.update(this.compile.data)
     }
 
-    update ( data ) {
-        
-        let value = generate(this.expression)(data)
-
-        this.before(value)
-        this.display(value)
+    update(data){
+        this.before && this.before()
+        this.render && this.render(generate(this.expression)(data))
     }
+
 }
 
 export default Directive

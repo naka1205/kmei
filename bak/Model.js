@@ -7,6 +7,7 @@ class Model extends Observeable {
     }
 
     change() {
+        console.log('change')
         this.notify(this);
     }
 
@@ -18,6 +19,7 @@ class Model extends Observeable {
                 return this.options[key];
             },
             set: (val) => {
+                console.log(key)
                 this.options[key] = val;
                 this.change()
             }

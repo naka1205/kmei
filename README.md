@@ -1,3 +1,10 @@
+# kmei
+
+MVVM 
+
+### 说明
+
+```js
 import App from './App';
 import Modules from './modules';
 
@@ -36,3 +43,4 @@ new App('app',{
         // this.data.lists = [{id:1,value: `title`}]
     }
 })
+```

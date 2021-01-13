@@ -40,7 +40,7 @@ class Compile {
                 if (!attributeValue) return false
     
                 node.removeAttribute(`${Configure.identifier.bind}${directive}`)
-                console.log(node)
+
                 this.bindDirective({
                     node,
                     name: directive,
@@ -55,8 +55,9 @@ class Compile {
     }
 
     bindDirective(options){
-        let directive = new Directive({...options,compile: this})
-        this.data.register && this.data.register(directive)
+        // let dis = new Directive({...options,compile: this,})
+
+        this.data.register(new Directive({...options,compile: this}))
     }
 
     bindAttribute(node, attribute){
