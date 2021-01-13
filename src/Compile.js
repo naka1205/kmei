@@ -55,12 +55,9 @@ class Compile {
     }
 
     bindDirective(options){
-        let dis = new Directive({
-            ...options,
-            compile: this,
-        })
+        // let dis = new Directive({...options,compile: this,})
 
-        this.data.register(dis)
+        this.data.register(new Directive({...options,compile: this,}))
     }
 
     bindAttribute(node, attribute){

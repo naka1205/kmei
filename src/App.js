@@ -1,7 +1,7 @@
 class App {
     static modules = []
     constructor(name,options) {
-        this.options = options
+        Object.assign(this, options)
         this.init(document.getElementById(name))
         // this.show(document.getElementById(name))
     }
@@ -13,7 +13,7 @@ class App {
     init(el) {
         this.initModules()
 
-        let computed = this.options.computed
+        let computed = this.computed
 
         if (typeof computed === 'object') {
             Object.keys(computed).forEach((key) => {
@@ -25,9 +25,7 @@ class App {
 
 
         this.view.setData(this.model)
-        // this.model.register(this.view)
-        this.options.onReady(this)
-
+        this.onReady(this)
         this.view.compile(el)
     }
 

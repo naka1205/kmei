@@ -5,7 +5,7 @@ import View from './View';
 
 const Controls = {
     init(app) {
-        app.control = new Control(app.options.methods);
+        app.control = new Control(app.methods);
         Object.keys(app.control.options).forEach((key) => {
             app.control.proxy(key)
         })
@@ -20,7 +20,7 @@ const Controls = {
 
 const Models = {
     init(app) {
-        app.model = new Model(app.options.data)
+        app.model = new Model(app.data)
 
         Object.keys(app.model.options).forEach((key) => {
             app.model.proxy(key)
@@ -43,7 +43,7 @@ const Models = {
 
 const Views =  {
     init(app) {
-        app.view = new View(app.options.template);
+        app.view = new View(app.template);
     }
 }
 
@@ -66,7 +66,7 @@ new App('app',{
     },
     onReady(app) {
         console.log('onReady',this)
-        app.hello()
+        this.hello()
     },
     onShow(app){
         console.log('onShow',app)
